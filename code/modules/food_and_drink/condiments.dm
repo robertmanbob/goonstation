@@ -17,6 +17,7 @@
 			user.visible_message("<span style=\"color:blue\">[user] adds [src] to \the [target].</span>", "<span style=\"color:blue\">You add [src] to \the [target].</span>")
 			src.reagents.trans_to(target, 100)
 			qdel (src)
+			return
 
 		if (istype(target, /obj/item/reagent_containers/))
 			user.visible_message("<span style='color:blue'><b>[user]</b> crushes up \the [src] in \the [target].</span>",\
@@ -123,7 +124,7 @@
 /obj/item/shaker // todo: rewrite shakers to not be horrible hacky nonsense - haine
 	name = "shaker"
 	desc = "A little bottle for shaking things onto other things."
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/foodNdrink/food.dmi'
 	icon_state = "shaker"
 	flags = FPRINT | TABLEPASS | ONBELT
 	w_class = 2.0

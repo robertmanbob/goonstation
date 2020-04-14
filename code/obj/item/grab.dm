@@ -282,7 +282,7 @@
 
 		step_to(src.assailant,T)
 
-		src.affecting.setStatus("pinned", duration = null)
+		src.affecting.setStatus("pinned", duration = INFINITE_STATUS)
 		src.affecting.force_laydown_standup()
 		if (!src.affecting.buckled)
 			set_affected_loc()
@@ -660,9 +660,8 @@
 		shot = 1
 
 		if (affecting && assailant && isitem(src.loc))
-			if (get_dist(src.affecting,src.assailant) <= 1)
-				var/obj/item/gun/G = src.loc
-				G.shoot_point_blank(src.affecting,src.assailant)
+			var/obj/item/gun/G = src.loc
+			G.shoot_point_blank(src.affecting,src.assailant,1) //don't shoot an offhand gun
 
 		qdel(src)
 

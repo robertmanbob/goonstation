@@ -3,7 +3,7 @@
 
 /obj/item/parts/human_parts
 	name = "human parts"
-	icon = 'icons/obj/human_parts.dmi'
+	icon = 'icons/obj/items/human_parts.dmi'
 	inhand_image_icon = 'icons/mob/inhand/hand_tools.dmi'
 	item_state = "buildpipe"
 	flags = FPRINT | ONBELT | TABLEPASS | CONDUCT
@@ -376,9 +376,8 @@
 				handimage.pixel_y = 6
 
 			if (H)
-				H.update_clothing()
+				//H.update_clothing()
 				H.update_body()
-				H.set_body_icon_dirty()
 				H.update_inhands()
 
 

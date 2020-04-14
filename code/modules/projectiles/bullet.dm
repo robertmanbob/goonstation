@@ -263,6 +263,7 @@ toxic - poisons
 	name = "stun bullet"
 	power = 20
 	ks_ratio = 0.0
+	dissipation_delay = 6 //One more tick before falloff begins
 	damage_type = D_ENERGY // FUCK YOU.
 	hit_type = null
 	icon_turf_hit = null // stun bullets shouldn't actually enter walls should they?
@@ -278,9 +279,6 @@ toxic - poisons
 				H.changeStatus("stunned", power)
 		return*/
 
-	on_pointblank(var/obj/projectile/P, var/mob/living/M)
-		stun_bullet_hit(P, M)
-		impact_image_effect("T", M)
 
 /datum/projectile/bullet/derringer
 	name = "bullet"
@@ -978,6 +976,16 @@ toxic - poisons
 	dissipation_rate = 5
 	dissipation_delay = 3
 	damage_type = D_KINETIC
+
+/datum/projectile/bullet/nails
+	name = "nails"
+	sname = "nails"
+	icon_state = "trace"
+	power = 4
+	dissipation_rate = 3
+	dissipation_delay = 4
+	damage_type = D_SLASHING
+	casing = /obj/item/casing/shotgun_gray
 
 /datum/projectile/bullet/grenade_shell
 	name = "40mm grenade conversion shell"

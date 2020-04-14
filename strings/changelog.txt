@@ -1,4 +1,142 @@
 ﻿
+(t)mon apr 12 20
+(u)Kubius
+(+)Batch one of small improvements and fixes to Kondaru.
+(u)Erinexx
+(+)Resprited janitor equipment (mops, buckets, laundry machines, ...).
+(u)ASS_JAM
+(*)Hello It is ASS_JAM. Please remember, you must not grief on ASS_JAM as a non-antag. Just play as usual. The entertainment this month is brought to you by:
+(*)Pali - AIs have a 5% chance to start with legs, HoS locker contains The Loose Cannon, trinket pool is unrestricted (all items), 25% chance for the game to pick a mutation at roundstart and give it to everyone - and much more
+(*)Moonlol - New wizard spell: Timestop. "This very handy dandy feature surely wont cause any runtimes"
+(*)Polivilas - Disables zipgun, adds a slamgun. "I will pay out 100k spacebux for better sprites - contact 2027#2027 on discord for more details."
+(*)Kubius - 2 new maps: Fleet and Kondaru. Do they compile? A mystery!!
+(*)Warcrimes - Updated reskinned Trunkmap, a couple tweaks here and there. Also enabled voting for most of the maps in the codebase.
+(*)UrsulaMajor - Updated Density, map smol.
+(u)Flaborized
+(*)Added a few small items to the surplus crate!
+(u)Tarmunora
+(*)On ass day you can shoot as fast as you can click.
+(*)Guns have a little bit of extra spread when drunk. Alcohol immunity mitigates this, to an extent
+(+)Added the ability to refill/combine ammo boxes by hitting them with a box of the same type
+(+)Changed pointblanking to hit with all the projectiles in a burst, not just one
+(+)Fixes up gunpoint grabs a little bit (should shoot more consistently)
+(t)sun apr 12 20
+(u)Goonstation Administration Team
+(*)Hello, we're changing ass day! Griefing is no longer allowed and we're adding a bunch of small fun changes. Click <a target="_blank" href="https://forum.ss13.co/showthread.php?tid=14330">here</a> for more details.
+(u)Enfaeutchie
+(+)The Lawgiver now comes with an instructional pamphlet.
+(+)Fixed a couple of Lawgiver typos, and a bug where knockout was listed as detain in examine text.
+(u)Flaborized
+(*)Resprited a bunch of the ore in the game!
+(u)adharainspace
+(*)finally added cross-round bookshelves to every map you can normally vote in! have fun!
+(+)minor qol changes to printing press
+(u)Moonlol
+(*)Soup is now serve-able in the afterlife bar!
+(t)sat apr 11 20
+(u)2027
+(+)Adds acquiring methods to old medals.
+(u)Gannets
+(+)Removed Nuclear Operative assault rifle, marksman's rifle and light machine gun as options for item-arm surgery.
+(u)Erinexx
+(*)New doughnuts sprites!
+(*)New bagel sprites!
+(*)New english muffin sprite!
+(+)Added new tool inhand sprites
+(+)Tweaked outline on fries sprite (what the fuck was i thinking before)
+(+)Crowbars no longer pry floortiles while on harm intent, hopefully now we won't uproot the entire station floor when trying to beat people to death
+(u)Tarmunora
+(*)Cloakers now deactivate on picking things up, throwing, and unarmed specials
+(+)Chopping weapons work properly on bolted doors
+(u)RichardGere
+(+)Fixed a bug that prevented players from swapping out the egun's power cell
+(*)Energy weapons can now have their power cells swapped out by clicking on the cells with an energy gun in hand
+(+)Fixed a bug that prevented players from swapping energy weapons to their other empty hand
+(u)SaccharineChampion
+(+)Added more cans to Atlas engineering storage, most notably its first empty cans.
+(u)adharainspace
+(+)Quantum telescope locations now work again
+(t)thu apr 10 20
+(u)Gannets
+(+)Nuclear operatives now pull their names from 6 callsign pools, nato alphabet, melee weapons, colors, birds, mammals and moons.
+(u)adharainspace
+(+)gives captains sabre a tooltip by making it use get_desc instead of examine
+(+)fixed radio host jumpsuit variants being invisible sometimes
+(u)trerri
+(+)Made some small sprite changes to the deconstruction device sprite.
+(+)Redid examine text for deconstruction device.
+(u)Tarmunora
+(*)Surgical tools now hit a bit harder and pierce a bit of armor
+(*)Chemical dipped scalpels no longer are foiled by having the reagents fall out of your target on the same stab that they were transferred in
+(*)Attaching a synthlimb will now fully attach it instead of leaving it at the last surgical stage
+(+)Fix messaging when repairing bleeding while having open surgical wounds
+(u)Scaltra
+(+)Adds the botanical mister as a valid transfer target for high capacity watering tanks
+(u)saccharineChampion
+(+)Additional argument in projectile code allows sounds to correctly play to drivers of large vehicles.
+(+)Large pod code changed to utilize this additional argument.
+(t)thu apr 09 20
+(u)TDHooligan
+(+)Sped up the chemicompiler significantly.
+(u)saccharineChampion
+(+)Corrected improper feedback on incorrect pod and secure safe lock guesses.
+(t)wed apr 08 20
+(u)mbc
+(*)High amounts of Brute and Burn damage will be weighted more heavily in deciding whether you die or not. In practice this means that you previously could take 600 brute/burn damage before dropping dead, and now you can take 400.
+(t)tue apr 07 20
+(u)Ryumi
+(+)Added a bit more lighting to the Afterlife Bar's garden.
+(t)mon apr 06 20
+(u)mbc
+(*)Fixed a number of assorted bugs where blood cleanables would get wrong unit amounts and bloody footprints were handling things improperly
+(*)Fixed bloodletting not working if you were under the max bleed level (that means when you bleed,  some reagents in bloodstream should properly come out with the blood regardless of the bleed type)
+(*)Made some changes that should increase client side FPS a bit, especially on ocean maps (water on station zlevel will look a little bit uglier re:lighting, sorry)
+(t)sun apr 05 20
+(u)mbc
+(*)You can now buckle into chairs by clicking yourself while standing on them. Same with climbing on chairs - click self with grab intent.
+(u)Flaborized
+(*)Added a new colorblind accessible HUD option! You can access it in the character setup options.
+(u)Flourish
+(*)Added Roach and Saxophone as spacebux rewards.
+(*)Disaster mode now includes a wraith at roundstart.
+(u)pali
+(*)Nukies on ass day can now get much wilder target locations.
+(+)Until we rework matsci somewhat light bulbs, light tubes and tripod bulbs are now 5 times more expensive when it comes to material cost
+(u)adharainspace
+(*)Added fancy new RCD sprites, courtesy of Flaborized!
+(u)Jero1717
+(*)Made Robustris Pro fancier and better
+(t)sat apr 04 20
+(u)ZeWaka
+(+)Handcuffing should be more consistent across the board.
+(u)Awkward Dryad
+(+)Fixed a plate stack runtime error.
+(*)Plates can now be stacked one by one instead of click-drag only.
+(u)mbc
+(+)Fixed bug where attack particle showed incorrect sprite when the attack obj was being deleted or dropped
+(+)Fixed bug where hit twitch animations wouldnt play in many circumstances
+(u)Nexusuxen
+(*)Added experimental "Equality" silicon law module.
+(u)Mordent
+(+)Fixed bug with cable coils in cyborg modules not having the correct amount.
+(+)Fixed bug with steel rods and cable coils in cyborg modules not starting with the correct sprite.
+(u)Tarmunora
+(*)Added range falloff to stun projectiles (to a minimum of half initial power)
+(*)Stun projectile pointblanks no longer apply bonus stuns on top of what the projectile would normally do
+(*)Reworked the wavegun found in QM experimental weapons crates to have more unique firing modes, all of which have non-standard range characteristics - try them out and experiment! Includes shiny new sprites by Flaborized
+(*)Rebalanced the detain and pulse projectiles to be hopefully closer together in power: detain now stuns in 2-3 shots, pulse now experiences some falloff with range on the disorient and throw
+(*)Taser shotgun pointblank implemented, and regular firing slightly rebalanced
+(+)Hopefully killed any last traces of the projectile doublehit bug
+(t)fri apr 03 20
+(u)archlinuxusa
+(+)Eggs no longer produce a meaty explosion in the microwave, splattered egg will now splatter all over your microwave... Yummy.
+(u)RichardGere
+(*)Reduced the stamina damage dealt by csabers
+(u)Erinexx
+(*)New dough, produce, herb, bowling melon, and snack sprites!
+(+)Shitty jpg pancake sprites have been preserved for future use <3
+(*)Clockwork orange is now a little more vivacious
+(*)A bunch of other new food sprites!
 (t)thu apr 02 20
 (u)mbc
 (*)Added Cow mutantrace. It has special speech and scream sounds! You can purchase it in the spacebux menu.
@@ -32,8 +170,8 @@
 (*)AwkwardDryad : Zoldorf (there's a new item in that wizard-in-a-box, go hack it to access the item and start something wonderful)
 (t)mon mar 23 20
 (u)pali
-(*)AwkwardDryad : Emergency hood now covers hair
-(*)Sidewinder7 : Chemicompiler improvement
+(+)AwkwardDryad : Emergency hood now covers hair
+(+)Sidewinder7 : Chemicompiler improvement
 (*)Polivilas : Compact medical sleepers (in escape shuttles for now)
 (*)glassofmilk : Dispatch mechcomp component
 (*)Polivilas : Owners of the Too Cool medal (monthly contest winners) can now use the :shelterbee: emote in OOC

@@ -10,9 +10,9 @@ VUVUZELA
 /obj/item/bananapeel
 	name = "Banana Peel"
 	desc = "A peel from a banana."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "banana_peel"
-	item_state = "banana_peel"
+	icon = 'icons/obj/foodNdrink/food_produce.dmi'
+	icon_state = "banana-peel"
+	item_state = "banana-peel"
 	w_class = 1.0
 	throwforce = 0
 	throw_speed = 4
@@ -56,7 +56,7 @@ VUVUZELA
 
 /obj/item/canned_laughter
 	name = "Canned laughter"
-	icon = 'icons/obj/can.dmi'
+	icon = 'icons/obj/foodNdrink/can.dmi'
 	icon_state = "cola-5"
 	desc = "All of the rewards of making a good joke with none of the effort! In a can!"
 	var/opened = 0

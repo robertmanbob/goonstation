@@ -324,15 +324,8 @@ THROWING DARTS
 			src.uses--
 			boutput(source, "You feel a faint click.")
 
-			if (source.handcuffed)
-				var/obj/item/W = source.handcuffed
-				source.handcuffed = null
-				if (W)
-					source.u_equip(W)
-					W.set_loc(source.loc)
-					source.update_clothing()
-					if (W)
-						W.layer = initial(W.layer)
+			if (source.hasStatus("handcuffed"))
+				source.handcuffs.drop_handcuffs(source)
 
 			// Added shackles here (Convair880).
 			if (ishuman(source))
@@ -1264,7 +1257,7 @@ var/global/list/tracking_implants = list() // things were looping through world 
 
 /obj/item/implantpad
 	name = "implantpad"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/items.dmi'
 	icon_state = "implantpad-0"
 	var/obj/item/implantcase/case = null
 	var/broadcasting = null

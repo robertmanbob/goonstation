@@ -162,7 +162,7 @@ datum
 				var/datum/reagents/silver_fulminate_holder = holder
 				var/silver_fulminate_volume = volume
 				silver_fulminate_holder.del_reagent("silver_fulminate")
-				silver_fulminate_holder.temperature_reagents(silver_fulminate_holder.total_temperature + silver_fulminate_volume*200)
+				silver_fulminate_holder.temperature_reagents(silver_fulminate_holder.total_temperature + silver_fulminate_volume*200,35,500)
 
 			reaction_temperature(var/exposed_temperature, var/exposed_volume)
 				if (exposed_temperature >= T0C + 30)
@@ -1205,7 +1205,7 @@ datum
 					if (11)
 						M.setStatus("paralysis", max(M.getStatusDuration("paralysis"), 30 * mult))
 						M.visible_message("<B>[M]</B> seizes up and falls limp, \his eyes dead and lifeless...")
-						M.resting = 1
+						M.setStatus("resting", INFINITE_STATUS)
 						playsound(get_turf(src), "sound/voice/death_[pick(1,2)].ogg", 40, 0, 0, M.get_age_pitch())
 					if (12 to 60) // Capped at ~2 minutes, that is 60 cycles + 10 paralysis (normally wears off at one per cycle).
 						M.changeStatus("paralysis", 30 * mult)
@@ -1235,7 +1235,7 @@ datum
 				if (!M) M = holder.my_atom
 				if (!counter) counter = 1
 				if (counter == 10)
-					M.resting = 1
+					M.setStatus("resting", INFINITE_STATUS)
 					M.visible_message("<B>[M]</B> seizes up and falls limp, \his eyes dead and lifeless...")
 					playsound(get_turf(src), "sound/voice/death_[pick(1,2)].ogg", 40, 0, 0, M.get_age_pitch())
 
@@ -3955,6 +3955,7 @@ datum
 				deathtarget.emote("scream")
 				deathtarget.setStatus("stunned", max(deathtarget.getStatusDuration("stunned"), 50))
 				deathtarget.setStatus("weakened", max(deathtarget.getStatusDuration("weakened"), 50))
+				deathtarget.unlock_medal("OW! MY BALLS!", 1)
 				var/deathturf = get_turf(src)
 				animate_slide(deathturf, 0, -24, 25)
 				sleep(20)

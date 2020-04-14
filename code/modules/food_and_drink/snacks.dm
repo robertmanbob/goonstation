@@ -51,7 +51,7 @@
 	name = "the charcoal singed essence of grilling itself"
 	desc = "Oh, the magic of a hot grill."
 	heal_amt = 10
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/foodNdrink/food.dmi'
 	icon_state = "fried" // fix this
 	food_effects = list("food_warm")
 	use_bite_mask = 0
@@ -2111,9 +2111,9 @@
 
 /obj/item/reagent_containers/food/snacks/emuffin/butter
 	name = "buttered english muffin"
-	desc = "Just like the queen intended it."
+	desc = "Just like the Queen intended it."
 	icon = 'icons/obj/foodNdrink/food_snacks.dmi'
-	icon_state = "emuffin_butter"
+	icon_state = "emuffin-butter"
 	heal_amt = 2
 	food_color = "#6A532D"
 	initial_reagents = list("butter"=3)
@@ -2437,11 +2437,11 @@ var/list/valid_jellybean_reagents = childrentypesof(/datum/reagent)
 			src.set_loc(user)
 			var/obj/item/reagent_containers/food/snacks/nigiri_roll/nigiri = new /obj/item/reagent_containers/food/snacks/nigiri_roll
 			switch(W.icon_state)
-				if("fillet_orange")
+				if("fillet-orange")
 					nigiri.icon_state = "nigiri1"
-				if("fillet_pink")
+				if("fillet-pink")
 					nigiri.icon_state = "nigiri2"
-				if("fillet_white")
+				if("fillet-white")
 					nigiri.icon_state = "nigiri3"
 			user.u_equip(W)
 			qdel(W)
@@ -2501,6 +2501,7 @@ var/list/valid_jellybean_reagents = childrentypesof(/datum/reagent)
 /obj/item/reagent_containers/food/snacks/sushi_roll/custom
 	icon = 'icons/obj/foodNdrink/food_sushi.dmi'
 	icon_state = "sushiroll"
+	food_color = "#5E6351"
 
 	attackby(obj/item/W as obj, mob/user as mob)
 		if (istool(W, TOOL_CUTTING | TOOL_SAWING))

@@ -19,14 +19,14 @@
 /* unused now
 /obj/item/weapon
 	name = "weapon"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
 */
 /////////////////////////////////////////////// Esword /////////////////////////////////////////
 
 /obj/item/sword
 	name = "cyalume saber"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "sword0"
 	uses_multiple_icon_states = 1
 	inhand_image_icon = 'icons/mob/inhand/hand_cswords.dmi'
@@ -46,11 +46,13 @@
 	mats = 18
 	contraband = 5
 	desc = "An illegal weapon that, when activated, uses cyalume to create an extremely dangerous saber. Can be concealed when deactivated."
-	stamina_damage = 35
+	stamina_damage = 35 // This gets applied by obj/item/attack, regardless of if the saber is active.
 	stamina_cost = 30
 	stamina_crit_chance = 35
 	var/do_stun = 1 //controlled by itemspecial for csword. sorry.
 	var/active_force = 60
+	var/active_stamina_dmg = 150
+	var/inactive_stamina_dmg = 35
 	var/inactive_force = 1
 	var/state_name = "sword"
 	var/off_w_class = 2
@@ -70,7 +72,7 @@
 
 			if (!is_special)
 #ifdef USE_STAMINA_DISORIENT
-				target.do_disorient(205, weakened = 50, stunned = 50, disorient = 40, remove_stamina_below_zero = 0)
+				target.do_disorient(0, weakened = 50, stunned = 50, disorient = 40, remove_stamina_below_zero = 0) //we don't want disorient protection to affect stamina damage
 #else
 				target.changeStatus("stunned", 50)
 				target.changeStatus("weakened", 5 SECONDS)
@@ -97,7 +99,7 @@
 		var/obj/item/sword/S = H.find_type_in_hand(/obj/item/sword, "right")
 		if (!S)
 			S = H.find_type_in_hand(/obj/item/sword, "left")
-		if (S && S.active)
+		if (S && S.active && !(H.lying || isdead(H) || H.hasStatus("stunned") || H.hasStatus("weakened") || H.hasStatus("paralysis")))
 			var/obj/itemspecialeffect/clash/C = unpool(/obj/itemspecialeffect/clash)
 			if(target.gender == MALE) playsound(get_turf(target), pick('sound/weapons/male_cswordattack1.ogg','sound/weapons/male_cswordattack2.ogg'), 70, 0, 0, max(0.7, min(1.2, 1.0 + (30 - H.bioHolder.age)/60)))
 			else playsound(get_turf(target), pick('sound/weapons/female_cswordattack1.ogg','sound/weapons/female_cswordattack2.ogg'), 70, 0, 0, max(0.7, min(1.4, 1.0 + (30 - H.bioHolder.age)/50)))
@@ -128,6 +130,7 @@
 	if (src.active)
 		boutput(user, "<span style=\"color:blue\">The sword is now active.</span>")
 		hit_type = DAMAGE_CUT
+		stamina_damage = active_stamina_dmg
 		if(ishuman(user))
 			var/mob/living/carbon/human/U = user
 			if(U.gender == MALE) playsound(get_turf(U),"sound/weapons/male_cswordstart.ogg", 70, 0, 0, max(0.7, min(1.2, 1.0 + (30 - U.bioHolder.age)/60)))
@@ -143,6 +146,7 @@
 	else
 		boutput(user, "<span style=\"color:blue\">The sword can now be concealed.</span>")
 		hit_type = DAMAGE_BLUNT
+		stamina_damage = inactive_stamina_dmg
 		if(ishuman(user))
 			var/mob/living/carbon/human/U = user
 			if(U.gender == MALE) playsound(get_turf(U),"sound/weapons/male_cswordturnoff.ogg", 70, 0, 0, max(0.7, min(1.2, 1.0 + (30 - U.bioHolder.age)/60)))
@@ -228,7 +232,7 @@
 
 /obj/item/dagger
 	name = "sacrificial dagger"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "dagger"
 	inhand_image_icon = 'icons/mob/inhand/hand_food.dmi'
 	item_state = "knife"
@@ -290,7 +294,7 @@
 
 /obj/item/dagger/throwing_knife
 	name = "cheap throwing knife"
-	// icon = 'icons/obj/weapons.dmi'
+	// icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "throwing_knife"
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
 	item_state = "ninjaknife"
@@ -329,7 +333,7 @@
 	name = "shuriken"
 	desc = "A cheap replica of an ancient japanese throwing star."
 	w_class = 1.0
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "shuriken"
 	throw_spin = 1
 	throw_speed = 4
@@ -349,7 +353,7 @@
 
 /obj/item/nunchucks
 	name = "nunchucks"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "nunchucks"
 	item_state = "nunchucks"
 	inhand_image_icon = 'icons/mob/inhand/hand_food.dmi'
@@ -372,7 +376,7 @@
 
 /obj/item/quarterstaff
 	name = "quarterstaff"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "quarterstaff"
 	item_state = "quarterstaff"
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
@@ -510,7 +514,7 @@
 /obj/item/knife_butcher/predspear
 	name = "Hunting Spear"
 	desc = "A very large, sharp spear."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "predspear"
 	inhand_image_icon = 'icons/mob/inhand/hand_food.dmi'
 	item_state = "knife_b"
@@ -525,7 +529,7 @@
 /obj/item/axe
 	name = "Axe"
 	desc = "An energised battle axe."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "axe0"
 	uses_multiple_icon_states = 1
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
@@ -583,7 +587,7 @@
 /obj/item/fireaxe
 	name = "fire axe"
 	desc = "An axe with a pick-shaped end on the back, intended to be used to get through doors and windows in an emergency."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
 	icon_state = "fireaxe"
 	item_state = "fireaxe"
@@ -650,7 +654,7 @@
 /obj/item/bat
 	name = "Baseball Bat"
 	desc = "Play ball! Note: Batter is responsible for any injuries sustained due to ball-hitting."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
 	icon_state = "baseballbat"
 	item_state = "baseballbat"
@@ -669,7 +673,7 @@
 	name = "rat stick"
 	desc = "Used for killing rats... Among other things."
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "ratstick"
 	item_state = "ratstick"
 	hit_type = DAMAGE_BLUNT
@@ -717,7 +721,7 @@
 /obj/item/katana
 	name = "katana"
 	desc = "That's it. I'm sick of all this 'Masterwork Cyalume Saber' bullshit that's going on in the SS13 system right now. Katanas deserve much better than that. Much, much better than that. I should know what I'm talking about. I myself commissioned a genuine katana in Space Japan for 2,400,000 Nuyen (that's about 20,000 credits) and have been practicing with it for almost 2 years now. I can even cut slabs of solid mauxite with my katana. Space Japanese smiths spend light-years working on a single katana and fold it up to a million times to produce the finest blades known to space mankind. Katanas are thrice as sharp as Syndicate sabers and thrice as hard for that matter too. Anything a c-saber can cut through, a katana can cut through better. I'm pretty sure a katana could easily bisect a drunk captain wearing full captain's armor with a simple tap. Ever wonder why the Syndicate never bothered conquering Space Japan? That's right, they were too scared to fight the disciplined Space Samurai and their space katanas of destruction. Even in World War 72, Nanotrasen soldiers targeted the men with the katanas first because their killing power was feared and respected."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "katana"
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
 	hit_type = DAMAGE_CUT
@@ -843,7 +847,7 @@
 /obj/item/katana/captain
 	icon_state = "cap_sword"
 	name = "Commander's Sabre"
-	desc = null
+	desc = ""
 
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
 	force = 16 //not awful but not amazing
@@ -851,12 +855,11 @@
 	delimb_prob = 1
 	contraband = 4
 
-	examine()
-		set src in usr
-		if (usr.mind && usr.mind.assigned_role == "Captain")
-			boutput(usr, "An ornate and finely crafted blade designed only for the most competent and highly respected of NT's chain of command. Like you!")
+	get_desc(var/dist, var/mob/user)
+		if (user.mind && user.mind.assigned_role == "Captain")
+			. = "An ornate and finely crafted blade designed only for the most competent and highly respected of NT's chain of command. Like you!"
 		else
-			boutput(usr, "Looks like some sort of cheap historical recreation sword. You'd have to be a total dork to own this thing.")
+			. = "Looks like some sort of cheap historical recreation sword. You'd have to be a total dork to own this thing."
 
 	New()
 		..()
@@ -909,7 +912,7 @@
 /obj/item/katana_sheath
 	name = "katana sheath"
 	desc = "It can clean a bloodied katana, and also allows for easier storage of a katana"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "katana_sheathed"
 	uses_multiple_icon_states = 1
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
@@ -1004,12 +1007,11 @@
 			return
 		..()
 
-	examine()
-		set src in usr
-		if (usr.mind && usr.mind.assigned_role == "Captain")
-			boutput(usr, "A stylish container for your sabre. Made from the finest metals NT can afford, or so you've heard.")
+	get_desc(var/dist, var/mob/user)
+		if (user.mind && user.mind.assigned_role == "Captain")
+			. = "A stylish container for your sabre. Made from the finest metals NT can afford, or so you've heard."
 		else
-			boutput(usr, "A tacky container for a sword. Hey! This thing's actually just plastic painted to look like metal! What a ripoff!")
+			. = "A tacky container for a sword. Hey! This thing's actually just plastic painted to look like metal! What a ripoff!"
 
 	blue //for NTSO medal reward
 		icon_state = "blue_cap_sword_scabbard"
@@ -1059,7 +1061,7 @@
 /obj/item/bloodthirsty_blade
 	name = "Bloodthirsty Blade"
 	desc = "A mysterious blade that hungers for blood & revels in strife. Grows stronger when used for malicious means."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
 	wear_image_icon = 'icons/mob/back.dmi' //todo back sprites
 	icon_state = "claymore"
@@ -1102,7 +1104,7 @@
 obj/item/fragile_sword
 	name = "fragile sword"
 	desc = "This great blade has seen many battles, as such it dulls quickly when used."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
 	icon_state = "fragile_sword"
 	item_state = "fragile_sword"
@@ -1155,7 +1157,7 @@ obj/item/whetstone
 /obj/item/heavy_power_sword
 	name = "crusader heavy power-sword mkII"
 	desc = "A heavy cyalume saber variant, builds generator charge when used in combat & supports multiple stance types."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'
 	wear_image_icon = 'icons/mob/back.dmi' //todo back sprites
 	icon_state = "claymore" //todo new sprite
@@ -1214,7 +1216,7 @@ obj/item/whetstone
 /obj/item/breaching_hammer
 	name = "airlock breaching sledgehammer"
 	desc = "A heavy metal hammer designed to crumple space station airlocks."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items/weapons.dmi'
 	icon_state = "breaching_sledgehammer"
 	item_state = "breaching_sledgehammer"
 	inhand_image_icon = 'icons/mob/inhand/hand_weapons.dmi'

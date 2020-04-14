@@ -61,7 +61,6 @@
 	var/blinded = null
 	var/druggy = 0
 	var/sleeping = 0.0
-	var/resting = 0.0
 	var/lying = 0.0
 	var/lying_old = 0
 	var/canmove = 1.0
@@ -92,7 +91,7 @@
 	var/m_intent = "run"
 	var/lastKnownIP = null
 	var/obj/stool/buckled = null
-	var/obj/item/handcuffs/handcuffed = null
+	var/obj/item/handcuffs/handcuffs = null
 	var/obj/item/l_hand = null
 	var/obj/item/r_hand = null
 	var/obj/item/back = null
@@ -139,7 +138,6 @@
 	var/mob/oldmob = null
 	var/datum/mind/oldmind = null
 	var/mob/dead/observer/ghost = null
-	var/twitching = 0
 	var/attack_alert = 0 // should we message admins when attacking another player?
 	var/suicide_alert = 0 // should we message admins when dying/dead?
 
@@ -202,7 +200,16 @@
 
 	var/obj/use_movement_controller = null
 	var/next_spammable_chem_reaction_time = 0
-
+//start of needed for timestop
+#if ASS_JAM
+	var/paused = FALSE
+	var/pausedbrute = 0
+	var/pausedburn = 0
+	var/pausedtox = 0
+	var/pausedoxy = 0
+	var/pausedbrain = 0
+#endif
+//end of needed for timestop
 	var/dir_locked = FALSE
 
 	var/cooldowns = list()
@@ -325,7 +332,7 @@
 	energy_shield = null
 	hallucinations = null
 	buckled = null
-	handcuffed = null
+	handcuffs = null
 	l_hand = null
 	r_hand = null
 	back = null
@@ -943,6 +950,12 @@
 // for mobs without organs
 /mob/proc/TakeDamage(zone, brute, burn, tox, damage_type)
 	hit_twitch(src)
+#if ASS_JAM//pausing damage for timestop
+	if(src.paused)
+		src.pausedburn = max(0, src.pausedburn + burn)
+		src.pausedbrute = max(0, src.pausedbrute + brute)
+		return
+#endif
 	src.health -= max(0, brute)
 	if (!is_heat_resistant())
 		src.health -= max(0, burn)
@@ -1060,7 +1073,7 @@
 		respawn_controller.subscribeNewRespawnee(src.ckey)
 
 /mob/proc/restrained()
-	if (src.handcuffed)
+	if (src.hasStatus("handcuffed"))
 		return 1
 
 /mob/proc/key_down(var/key)
@@ -1348,8 +1361,8 @@
 	if (W == src.l_hand)
 		src.l_hand = null
 
-	if (W == src.handcuffed)
-		src.handcuffed = null
+	if (W == src.handcuffs)
+		src.handcuffs = null
 	else if (W == src.back)
 		src.back = null
 	else if (W == src.wear_mask)
@@ -1591,7 +1604,7 @@
 	return
 
 /mob/proc/can_use_hands()
-	if (src.handcuffed)
+	if (src.hasStatus("handcuffed"))
 		return 0
 	if (src.buckled && istype(src.buckled, /obj/stool/bed)) // buckling does not restrict hands
 		return 0
@@ -2330,7 +2343,8 @@
 	src.take_brain_damage(-INFINITY)
 	src.health = src.max_health
 	src.buckled = initial(src.buckled)
-	src.handcuffed = initial(src.handcuffed)
+	if (src.hasStatus("handcuffed"))
+		src.handcuffs.destroy_handcuffs(src)
 	src.bodytemperature = src.base_body_temp
 	if (src.stat > 1)
 		setalive(src)
@@ -2900,3 +2914,10 @@
 		src.mind.damned = 1
 
 	return 1
+
+/mob/proc/get_id()
+	if(istype(src.equipped(), /obj/item/card/id))
+		return src.equipped()
+	if(istype(src.equipped(), /obj/item/device/pda2))
+		var/obj/item/device/pda2/pda = src.equipped()
+		return pda.ID_card

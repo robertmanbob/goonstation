@@ -94,7 +94,7 @@
 		boutput(src, __red("[target] braces themselves to stop your tackle effortlessly!"))
 		return
 
-	if (src.handcuffed)
+	if (src.hasStatus("handcuffed"))
 		boutput(src, __red("With your hands tied behind your back, you slam into [target] face first!"))
 		src.changeStatus("weakened", 3 SECONDS)
 		src.force_laydown_standup()
@@ -164,7 +164,7 @@
 /obj/item/football
 	name = "football"
 	desc = "A pigskin. An oblate leather spheroid. For tossing around."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/items.dmi'
 	icon_state = "football"
 	uses_multiple_icon_states = 1
 	item_state = "football"
